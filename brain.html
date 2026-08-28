@@ -709,8 +709,8 @@ html, body {
               <div class="hud-node-status" id="hud-status">ONLINE // SYNC</div>
             </div>
 
-            <!-- Hyperlink Title with target="_top" -->
-            <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_top" class="hud-title-link" id="hud-title-link">
+            <!-- Hyperlink Title with target="_blank" -->
+            <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="hud-title-link" id="hud-title-link">
               MOSS-BRAIN.COM - Project Cortex <span class="link-arrow">→</span>
             </a>
 
@@ -721,7 +721,7 @@ html, body {
 
             <div class="hud-footer">
               <span>SECURITY: LEVEL-A</span>
-              <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_top" class="hud-action-btn" id="hud-action-btn">
+              <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="hud-action-btn" id="hud-action-btn">
                 OPEN NODE ↗
               </a>
             </div>
@@ -934,12 +934,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hudBadge) hudBadge.textContent = data.nodeCode;
     if (hudStatus) hudStatus.textContent = data.status;
+    
+    // Explicitly target _blank with rel="noopener noreferrer"
     if (hudTitleLink) {
       hudTitleLink.href = data.url;
+      hudTitleLink.target = '_blank';
+      hudTitleLink.rel = 'noopener noreferrer';
       hudTitleLink.innerHTML = data.title + ' <span class="link-arrow">→</span>';
     }
     if (hudDescription) hudDescription.textContent = data.description;
-    if (hudActionBtn) hudActionBtn.href = data.url;
+    if (hudActionBtn) {
+      hudActionBtn.href = data.url;
+      hudActionBtn.target = '_blank';
+      hudActionBtn.rel = 'noopener noreferrer';
+    }
 
     if (reticleCenter && reticleRing && reticleGroup) {
       reticleCenter.setAttribute('cx', data.anchor.x);
