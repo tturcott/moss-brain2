@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOSS-BRAIN // Interactive Neural Map</title>
+  <title>MOSS-BRAIN // Business Resource & Automated Intelligence Network</title>
   <style>
 /* ==========================================================================
    MOSS-BRAIN // Modern Light Cybernetic Interface Stylesheet (Iframe Ready)
@@ -588,7 +588,7 @@ html, body {
           <span class="moss-accent">MOSS</span>-BRAIN
         </h1>
         <div class="main-subtitle">
-          <span>Interactive Cognitive Topology</span>
+          <span>Business Resource & Automated Intelligence Network</span>
         </div>
       </div>
     </header>
@@ -731,7 +731,7 @@ html, body {
       </div>
     </main>
 
-    <!-- Sector Quick Navigation & Selector Panel -->
+    <!-- Sector Quick Navigation & Selector Panel (Hyperlinked) -->
     <section class="directory-section">
       <div class="directory-title">
         <span>Neural Subsystem Matrix</span>
@@ -739,30 +739,30 @@ html, body {
 
       <div class="sector-pills-grid">
 
-        <button class="sector-pill active" data-sector="cortex">
+        <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="sector-pill active" data-sector="cortex">
           <span class="pill-node">NODE // CTX-01</span>
-          <span class="pill-name">Project Cortex</span>
-        </button>
+          <span class="pill-name">Project Cortex ↗</span>
+        </a>
 
-        <button class="sector-pill" data-sector="synapse">
+        <a href="http://localhost:3300/" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="synapse">
           <span class="pill-node">NODE // SYN-02</span>
-          <span class="pill-name">Project Synapse</span>
-        </button>
+          <span class="pill-name">Project Synapse ↗</span>
+        </a>
 
-        <button class="sector-pill" data-sector="retina">
+        <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="retina">
           <span class="pill-node">NODE // RET-03</span>
-          <span class="pill-name">Project Retina</span>
-        </button>
+          <span class="pill-name">Project Retina ↗</span>
+        </a>
 
-        <button class="sector-pill" data-sector="hippocampus">
+        <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="hippocampus">
           <span class="pill-node">NODE // HIP-04</span>
-          <span class="pill-name">Project Hippocampus</span>
-        </button>
+          <span class="pill-name">Project Hippocampus ↗</span>
+        </a>
 
-        <button class="sector-pill" data-sector="basal-ganglia">
+        <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="basal-ganglia">
           <span class="pill-node">NODE // BG-05</span>
-          <span class="pill-name">Project Basal Ganglia</span>
-        </button>
+          <span class="pill-name">Project Basal Ganglia ↗</span>
+        </a>
       </div>
     </section>
 
@@ -935,7 +935,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hudBadge) hudBadge.textContent = data.nodeCode;
     if (hudStatus) hudStatus.textContent = data.status;
     
-    // Explicitly target _blank with rel="noopener noreferrer"
     if (hudTitleLink) {
       hudTitleLink.href = data.url;
       hudTitleLink.target = '_blank';
@@ -987,11 +986,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     group.addEventListener('click', (e) => {
-      e.stopPropagation();
       activateSector(sectorId);
     });
   });
 
+  // Sector Pill Listeners (Hyperlinked buttons)
   sectorPills.forEach(pill => {
     const sectorId = pill.dataset.sector;
 
@@ -999,7 +998,7 @@ document.addEventListener('DOMContentLoaded', () => {
       activateSector(sectorId);
     });
 
-    pill.addEventListener('click', () => {
+    pill.addEventListener('focus', () => {
       activateSector(sectorId);
     });
   });
