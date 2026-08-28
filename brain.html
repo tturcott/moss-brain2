@@ -4,7 +4,565 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MOSS-BRAIN // Interactive Neural Map</title>
-  <link rel="stylesheet" href="css/light-style.css">
+  <style>
+/* ==========================================================================
+   MOSS-BRAIN // Modern Light Cybernetic Interface Stylesheet (Iframe Ready)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-page: #ffffff;
+  --bg-subtle: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card-hover: rgba(248, 250, 252, 0.98);
+  
+  --primary-blue: #0284c7;
+  --cyan-accent: #00bcd4;
+  --cyan-bright: #00d4ff;
+  --cyan-glow: rgba(0, 180, 216, 0.4);
+  
+  --text-dark: #0f172a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  
+  --border-light: rgba(203, 213, 225, 0.8);
+  --border-focus: #0284c7;
+  --shadow-hud: 0 18px 40px -10px rgba(15, 23, 42, 0.15), 0 0 25px rgba(2, 132, 199, 0.12);
+  
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-accent: 'Rajdhani', sans-serif;
+  
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.08) 0%, transparent 65%),
+    radial-gradient(circle at 85% 85%, rgba(0, 188, 212, 0.05) 0%, transparent 50%),
+    linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+}
+
+/* Container for Iframe */
+.iframe-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Header */
+.modern-header {
+  text-align: center;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.top-telemetry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--primary-blue);
+  letter-spacing: 1.5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  margin-bottom: 14px;
+}
+
+.telemetry-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--cyan-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--cyan-bright);
+  animation: pulse-light 2s infinite ease-in-out;
+}
+
+@keyframes pulse-light {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 12px var(--cyan-bright); }
+}
+
+.audio-toggle-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: var(--text-dark);
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-fast);
+}
+
+.audio-toggle-btn:hover {
+  background: #e2e8f0;
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+/* Modern Clean MOSS-BRAIN Title */
+.main-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.main-title .moss-accent {
+  color: var(--primary-blue);
+  background: linear-gradient(135deg, #0284c7 0%, #00b4d8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main-subtitle {
+  font-family: var(--font-accent);
+  font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.main-subtitle::before,
+.main-subtitle::after {
+  content: '';
+  height: 1px;
+  width: 35px;
+  background: #cbd5e1;
+}
+
+/* ==========================================================================
+   INTERACTIVE BRAIN STAGE
+   ========================================================================== */
+.brain-stage-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1040px;
+  margin: 6px auto 20px;
+}
+
+.modern-frame {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 
+    0 20px 50px -15px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(2, 132, 199, 0.08);
+}
+
+.brain-canvas-container {
+  position: relative;
+  width: 100%;
+  padding-top: 55.859375%; /* 572 / 1024 * 100 */
+  overflow: visible;
+  border-radius: 8px;
+  background: #f1f5f9;
+}
+
+.brain-image-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  filter: contrast(1.03) brightness(1.0);
+}
+
+.svg-interactive-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: all;
+  z-index: 20;
+}
+
+/* SVG Hotspot Styles */
+.brain-hotspot-group {
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+}
+
+.hotspot-base-path {
+  fill: rgba(2, 132, 199, 0.0);
+  stroke: rgba(2, 132, 199, 0.45);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  transition: all var(--transition-smooth);
+}
+
+.brain-hotspot-group:hover .hotspot-base-path,
+.brain-hotspot-group.active .hotspot-base-path {
+  fill: rgba(0, 212, 255, 0.28);
+  stroke: #0284c7;
+  stroke-width: 3;
+  stroke-dasharray: none;
+  filter: url(#light-glow-filter);
+}
+
+.hotspot-circuit-trace {
+  fill: none;
+  stroke: #0284c7;
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.brain-hotspot-group:hover .hotspot-circuit-trace,
+.brain-hotspot-group.active .hotspot-circuit-trace {
+  opacity: 1;
+  animation: circuit-flow 1.5s linear infinite;
+}
+
+@keyframes circuit-flow {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Leader Line */
+.leader-line-element {
+  fill: none;
+  stroke: #0284c7;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 2px 6px rgba(2, 132, 199, 0.5));
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.leader-line-element.active {
+  stroke-dashoffset: 0;
+}
+
+.reticle-group {
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.reticle-group.active {
+  opacity: 1;
+}
+
+.reticle-center-dot {
+  fill: #0284c7;
+  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.8));
+}
+
+.reticle-outer-ring {
+  fill: none;
+  stroke: #0284c7;
+  stroke-width: 2;
+  stroke-dasharray: 6 3;
+  animation: rotate-reticle 6s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate-reticle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   MODERN LIGHT HUD CALLOUT CARD
+   ========================================================================== */
+.hud-callout-card {
+  position: absolute;
+  width: 360px;
+  background: var(--bg-card);
+  border: 1px solid #bae6fd;
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-hud);
+  backdrop-filter: blur(14px);
+  z-index: 50;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  pointer-events: none;
+}
+
+.hud-callout-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+.hud-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 6px;
+  gap: 8px;
+}
+
+.hud-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hud-node-status {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Hyperlink Title */
+.hud-title-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  padding: 2px 0;
+  transition: var(--transition-fast);
+}
+
+.hud-title-link:hover {
+  color: var(--primary-blue);
+  transform: translateX(3px);
+}
+
+.hud-title-link .link-arrow {
+  display: inline-block;
+  color: var(--primary-blue);
+  font-size: 1.1rem;
+  transition: transform var(--transition-fast);
+}
+
+.hud-title-link:hover .link-arrow {
+  transform: translateX(4px);
+}
+
+/* Description Area */
+.hud-description {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--text-body);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.hud-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border-top: 1px dashed #cbd5e1;
+  padding-top: 8px;
+}
+
+.hud-action-btn {
+  background: #0284c7;
+  color: #ffffff;
+  font-family: var(--font-accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 5px;
+  letter-spacing: 0.5px;
+  transition: var(--transition-fast);
+}
+
+.hud-action-btn:hover {
+  background: #0369a1;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+}
+
+/* ==========================================================================
+   SECTOR DIRECTORY PANEL
+   ========================================================================== */
+.directory-section {
+  width: 100%;
+  max-width: 1040px;
+  margin-top: 8px;
+}
+
+.directory-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.directory-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.sector-pills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.sector-pill {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 9px 13px;
+  color: var(--text-body);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sector-pill .pill-node {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.sector-pill .pill-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.sector-pill:hover,
+.sector-pill.active {
+  background: #f0f9ff;
+  border-color: #0284c7;
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.12);
+  transform: translateY(-1px);
+}
+
+.sector-pill.active .pill-name {
+  color: #0284c7;
+}
+
+/* Footer */
+.footer-telemetry {
+  width: 100%;
+  max-width: 1040px;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.telemetry-coords {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .hud-callout-card {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 14px;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+  
+  .leader-line-element {
+    display: none;
+  }
+}
+
+  </style>
 </head>
 <body>
 
@@ -18,7 +576,7 @@
           <span>MOSS-BRAIN // NEURAL MATRIX</span>
         </div>
         <div class="telemetry-tag">
-          <span>ACTIVE SECTOR: <span id="active-sector-name" class="telemetry-coords">NEURAL SECTOR // CTX-01</span></span>
+          <span>ACTIVE SECTOR: <span id="active-sector-name" class="telemetry-coords">PROJECT CORTEX // CTX-01</span></span>
         </div>
         <button id="audio-toggle" class="audio-toggle-btn" title="Toggle UI Sound">
           <span>🔇</span> AUDIO: MUTED
@@ -40,7 +598,7 @@
       <div class="modern-frame">
 
         <div class="brain-canvas-container">
-          <!-- Background Base Cybernetic Image -->
+          <!-- Base Cybernetic Brain Image -->
           <img src="assets/brain.jpg" alt="MOSS-BRAIN Cybernetic Motherboard" class="brain-image-layer">
 
           <!-- SVG Interactive Hotspot & Leader Line Overlay -->
@@ -66,7 +624,8 @@
               <circle id="reticle-center" class="reticle-center-dot" cx="440" cy="150" r="4" />
             </g>
 
-            <!-- 1. CORTEX (Primary Requested Region - Cerebral Cortex Mantle & Ridges) -->
+
+            <!-- 1. PROJECT CORTEX -->
             <g class="brain-hotspot-group" data-sector="cortex" id="hotspot-cortex">
               <path class="hotspot-base-path" d="
                 M 235,205 
@@ -81,29 +640,24 @@
                 Z
               " />
               <path class="hotspot-circuit-trace" d="M 375,88 Q 450,60 540,62 Q 650,100 750,170" />
-              <path class="hotspot-circuit-trace" d="M 310,185 Q 400,210 480,250" />
             </g>
 
-            <!-- 2. MICROCHIP NEURAL CORE (Temporal / Processor) -->
-            <g class="brain-hotspot-group" data-sector="core" id="hotspot-core">
+            <!-- 2. PROJECT SYNAPSE (Microchip Hardware Core) -->
+            <g class="brain-hotspot-group" data-sector="synapse" id="hotspot-synapse">
               <path class="hotspot-base-path" d="
-                M 300,330 
-                L 410,310 
-                L 490,300 
-                L 535,320 
-                L 640,330 
+                M 520,330 
+                L 645,330 
                 L 675,410 
                 L 640,480 
                 L 510,475 
                 L 460,420 
-                L 330,425 
                 Z
               " />
-              <path class="hotspot-circuit-trace" d="M 535,320 L 675,410 L 640,480 L 510,475" />
+              <path class="hotspot-circuit-trace" d="M 520,330 L 675,410 L 640,480 L 510,475" />
             </g>
 
-            <!-- 3. OCCIPITAL MATRIX HUB (VENDCE 1) -->
-            <g class="brain-hotspot-group" data-sector="matrix" id="hotspot-matrix">
+            <!-- 3. PROJECT RETINA (Occipital Visual Matrix / VENDCE 1) -->
+            <g class="brain-hotspot-group" data-sector="retina" id="hotspot-retina">
               <path class="hotspot-base-path" d="
                 M 615,245 
                 L 675,270 
@@ -119,8 +673,20 @@
               <path class="hotspot-circuit-trace" d="M 675,270 L 790,280 L 785,395" />
             </g>
 
-            <!-- 4. FRONTAL LOGIC NEXUS (01101) -->
-            <g class="brain-hotspot-group" data-sector="logic" id="hotspot-logic">
+            <!-- 4. PROJECT HIPPOCAMPUS (Deep Memory Core) -->
+            <g class="brain-hotspot-group" data-sector="hippocampus" id="hotspot-hippocampus">
+              <path class="hotspot-base-path" d="
+                M 290,270 
+                C 350,240 410,245 465,265 
+                C 480,310 450,350 380,355 
+                C 320,330 290,300 290,270 
+                Z
+              " />
+              <path class="hotspot-circuit-trace" d="M 290,270 Q 380,250 465,265" />
+            </g>
+
+            <!-- 5. PROJECT BASAL GANGLIA (Frontal Logic & Action Gating / 01101) -->
+            <g class="brain-hotspot-group" data-sector="basal-ganglia" id="hotspot-basal-ganglia">
               <path class="hotspot-base-path" d="
                 M 140,260 
                 L 195,215 
@@ -134,34 +700,18 @@
               <path class="hotspot-circuit-trace" d="M 140,260 L 255,235 L 250,360" />
             </g>
 
-            <!-- 5. CEREBELLAR SYNAPTIC BUS -->
-            <g class="brain-hotspot-group" data-sector="bus" id="hotspot-bus">
-              <path class="hotspot-base-path" d="
-                M 730,425 
-                L 790,395 
-                L 845,360 
-                L 905,370 
-                L 960,440 
-                L 940,510 
-                L 820,520 
-                L 745,480 
-                Z
-              " />
-              <path class="hotspot-circuit-trace" d="M 790,395 L 905,370 L 940,510" />
-            </g>
-
           </svg>
 
           <!-- Modern Light Floating HUD Callout Card -->
           <div id="hud-callout" class="hud-callout-card">
             <div class="hud-card-header">
-              <div class="hud-badge" id="hud-badge">NEURAL SECTOR // CTX-01</div>
+              <div class="hud-badge" id="hud-badge">PROJECT CORTEX // CTX-01</div>
               <div class="hud-node-status" id="hud-status">ONLINE // SYNC</div>
             </div>
 
-            <!-- Hyperlink Title (configured with target="_top" for iframe navigation) -->
+            <!-- Hyperlink Title with target="_top" -->
             <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_top" class="hud-title-link" id="hud-title-link">
-              MOSS-BRAIN.COM - Cortex <span class="link-arrow">→</span>
+              MOSS-BRAIN.COM - Project Cortex <span class="link-arrow">→</span>
             </a>
 
             <!-- Description Area -->
@@ -188,29 +738,30 @@
       </div>
 
       <div class="sector-pills-grid">
+
         <button class="sector-pill active" data-sector="cortex">
           <span class="pill-node">NODE // CTX-01</span>
-          <span class="pill-name">Cerebral Cortex</span>
+          <span class="pill-name">Project Cortex</span>
         </button>
 
-        <button class="sector-pill" data-sector="core">
-          <span class="pill-node">NODE // PROC-02</span>
-          <span class="pill-name">Neural Core</span>
+        <button class="sector-pill" data-sector="synapse">
+          <span class="pill-node">NODE // SYN-02</span>
+          <span class="pill-name">Project Synapse</span>
         </button>
 
-        <button class="sector-pill" data-sector="matrix">
-          <span class="pill-node">NODE // VENDCE-03</span>
-          <span class="pill-name">Occipital Matrix</span>
+        <button class="sector-pill" data-sector="retina">
+          <span class="pill-node">NODE // RET-03</span>
+          <span class="pill-name">Project Retina</span>
         </button>
 
-        <button class="sector-pill" data-sector="logic">
-          <span class="pill-node">NODE // LOGIC-04</span>
-          <span class="pill-name">Frontal Logic</span>
+        <button class="sector-pill" data-sector="hippocampus">
+          <span class="pill-node">NODE // HIP-04</span>
+          <span class="pill-name">Project Hippocampus</span>
         </button>
 
-        <button class="sector-pill" data-sector="bus">
-          <span class="pill-node">NODE // SYNBUS-05</span>
-          <span class="pill-name">Synaptic Bus</span>
+        <button class="sector-pill" data-sector="basal-ganglia">
+          <span class="pill-node">NODE // BG-05</span>
+          <span class="pill-name">Project Basal Ganglia</span>
         </button>
       </div>
     </section>
@@ -223,6 +774,247 @@
 
   </div>
 
-  <script src="js/app.js"></script>
+  <script>
+/**
+ * MOSS-BRAIN // Cybernetic Neural Interface Controller
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Sector Registry for the 5 Brain Projects
+  const SECTOR_DATA = {
+    cortex: {
+      id: 'cortex',
+      nodeCode: 'PROJECT CORTEX // CTX-01',
+      title: 'MOSS-BRAIN.COM - Project Cortex',
+      url: 'https://sites.google.com/view/moss-brain/cortex?authuser=0',
+      description: 'Primary high-level cognitive and algorithmic synthesis matrix. Manages abstract reasoning, multi-modal neural integration, executive decision pipelines, and continuous knowledge adaptation across the MOSS-BRAIN network.',
+      status: 'ONLINE // SYNC',
+      anchor: { x: 440, y: 150 },
+      elbow: { x: 530, y: 100 },
+      cardOffset: { x: 55, y: 8 }
+    },
+    synapse: {
+      id: 'synapse',
+      nodeCode: 'PROJECT SYNAPSE // SYN-02',
+      title: 'Project Synapse (Local Core)',
+      url: 'http://localhost:3300/',
+      description: 'Hardware-accelerated tensor execution engine and high-bandwidth synaptic bus bridging synthetic neural network architectures with physical silicon compute circuitry.',
+      status: 'LOCAL // 3300 ACTIVE',
+      anchor: { x: 570, y: 395 },
+      elbow: { x: 440, y: 460 },
+      cardOffset: { x: 6, y: 44 }
+    },
+    retina: {
+      id: 'retina',
+      nodeCode: 'PROJECT RETINA // RET-03',
+      title: 'MOSS-BRAIN.COM - Project Retina',
+      url: 'https://sites.google.com/view/moss-brain/cortex?authuser=0',
+      description: 'Deep visual-spatial pattern recognition and multi-spectral sensory perception engine operating across recursive cryptographic circuit matrices (VENDCE 1).',
+      status: 'OPTICAL // 99.4%',
+      anchor: { x: 740, y: 310 },
+      elbow: { x: 840, y: 220 },
+      cardOffset: { x: 58, y: 20 }
+    },
+    hippocampus: {
+      id: 'hippocampus',
+      nodeCode: 'PROJECT HIPPOCAMPUS // HIP-04',
+      title: 'MOSS-BRAIN.COM - Project Hippocampus',
+      url: 'https://sites.google.com/view/moss-brain/cortex?authuser=0',
+      description: 'Dynamic neural memory consolidation engine managing contextual indexing, relational knowledge graph retrieval, and experiential synaptic replay.',
+      status: 'MEMORY // INDEXED',
+      anchor: { x: 380, y: 290 },
+      elbow: { x: 260, y: 220 },
+      cardOffset: { x: 6, y: 14 }
+    },
+    'basal-ganglia': {
+      id: 'basal-ganglia',
+      nodeCode: 'PROJECT BASAL GANGLIA // BG-05',
+      title: 'MOSS-BRAIN.COM - Project Basal Ganglia',
+      url: 'https://sites.google.com/view/moss-brain/cortex?authuser=0',
+      description: 'Central action-selection gating system executing deterministic rule verification, behavioral sequence orchestration, and real-time effector dispatch (01101).',
+      status: 'GATEWAY // READY',
+      anchor: { x: 200, y: 290 },
+      elbow: { x: 130, y: 180 },
+      cardOffset: { x: 6, y: 8 }
+    }
+  };
+
+  const hudCard = document.getElementById('hud-callout');
+  const hudBadge = document.getElementById('hud-badge');
+  const hudStatus = document.getElementById('hud-status');
+  const hudTitleLink = document.getElementById('hud-title-link');
+  const hudDescription = document.getElementById('hud-description');
+  const hudActionBtn = document.getElementById('hud-action-btn');
+  const leaderLine = document.getElementById('leader-line');
+  const reticleGroup = document.getElementById('reticle-group');
+  const reticleCenter = document.getElementById('reticle-center');
+  const reticleRing = document.getElementById('reticle-ring');
+  const hotspotGroups = document.querySelectorAll('.brain-hotspot-group');
+  const sectorPills = document.querySelectorAll('.sector-pill');
+  const mouseCoords = document.getElementById('mouse-coords');
+  const activeSectorName = document.getElementById('active-sector-name');
+  const audioToggle = document.getElementById('audio-toggle');
+
+  let activeSector = null;
+  let audioEnabled = false;
+  let audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        audioCtx = new AudioContext();
+      }
+    }
+  }
+
+  function playUiTone(frequency, type, duration) {
+    if (!audioEnabled || !audioCtx) return;
+    try {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type || 'sine';
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+      console.warn('Audio feedback error:', e);
+    }
+  }
+
+  if (audioToggle) {
+    audioToggle.addEventListener('click', () => {
+      initAudio();
+      audioEnabled = !audioEnabled;
+      audioToggle.innerHTML = audioEnabled 
+        ? '<span class="pulse-dot"></span> AUDIO: ACTIVE' 
+        : '<span>🔇</span> AUDIO: MUTED';
+      if (audioEnabled) {
+        playUiTone(880, 'sine', 0.15);
+      }
+    });
+  }
+
+  function activateSector(sectorId, triggerAudio = true) {
+    const data = SECTOR_DATA[sectorId];
+    if (!data) return;
+
+    activeSector = sectorId;
+
+    if (triggerAudio) {
+      playUiTone(1050, 'triangle', 0.12);
+    }
+
+    hotspotGroups.forEach(group => {
+      if (group.dataset.sector === sectorId) {
+        group.classList.add('active');
+      } else {
+        group.classList.remove('active');
+      }
+    });
+
+    sectorPills.forEach(pill => {
+      if (pill.dataset.sector === sectorId) {
+        pill.classList.add('active');
+      } else {
+        pill.classList.remove('active');
+      }
+    });
+
+    if (activeSectorName) {
+      activeSectorName.textContent = data.nodeCode;
+    }
+
+    if (hudBadge) hudBadge.textContent = data.nodeCode;
+    if (hudStatus) hudStatus.textContent = data.status;
+    if (hudTitleLink) {
+      hudTitleLink.href = data.url;
+      hudTitleLink.innerHTML = data.title + ' <span class="link-arrow">→</span>';
+    }
+    if (hudDescription) hudDescription.textContent = data.description;
+    if (hudActionBtn) hudActionBtn.href = data.url;
+
+    if (reticleCenter && reticleRing && reticleGroup) {
+      reticleCenter.setAttribute('cx', data.anchor.x);
+      reticleCenter.setAttribute('cy', data.anchor.y);
+      reticleRing.setAttribute('cx', data.anchor.x);
+      reticleRing.setAttribute('cy', data.anchor.y);
+      reticleGroup.classList.add('active');
+    }
+
+    if (hudCard) {
+      if (window.innerWidth > 900) {
+        hudCard.style.left = data.cardOffset.x + '%';
+        hudCard.style.top = data.cardOffset.y + '%';
+        hudCard.style.right = 'auto';
+        hudCard.style.bottom = 'auto';
+
+        if (leaderLine) {
+          const targetX = (data.cardOffset.x / 100) * 1024;
+          const targetY = (data.cardOffset.y / 100) * 572 + 25;
+          const pathData = 'M ' + data.anchor.x + ' ' + data.anchor.y + ' L ' + data.elbow.x + ' ' + data.elbow.y + ' L ' + targetX + ' ' + targetY;
+          leaderLine.setAttribute('d', pathData);
+          leaderLine.classList.add('active');
+        }
+      } else {
+        if (leaderLine) leaderLine.classList.remove('active');
+      }
+
+      hudCard.classList.add('visible');
+    }
+  }
+
+  hotspotGroups.forEach(group => {
+    const sectorId = group.dataset.sector;
+
+    group.addEventListener('mouseenter', () => {
+      activateSector(sectorId);
+    });
+
+    group.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activateSector(sectorId);
+    });
+  });
+
+  sectorPills.forEach(pill => {
+    const sectorId = pill.dataset.sector;
+
+    pill.addEventListener('mouseenter', () => {
+      activateSector(sectorId);
+    });
+
+    pill.addEventListener('click', () => {
+      activateSector(sectorId);
+    });
+  });
+
+  const svgLayer = document.querySelector('.svg-interactive-layer');
+  if (svgLayer && mouseCoords) {
+    svgLayer.addEventListener('mousemove', (e) => {
+      const rect = svgLayer.getBoundingClientRect();
+      const x = Math.round(((e.clientX - rect.left) / rect.width) * 1024);
+      const y = Math.round(((e.clientY - rect.top) / rect.height) * 572);
+      mouseCoords.textContent = 'X: ' + x.toString().padStart(4, '0') + ' | Y: ' + y.toString().padStart(4, '0');
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    if (activeSector) {
+      activateSector(activeSector, false);
+    }
+  });
+
+  activateSector('cortex', false);
+});
+
+  </script>
 </body>
 </html>
