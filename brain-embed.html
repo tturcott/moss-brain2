@@ -749,12 +749,12 @@ html, body {
           <span class="pill-name">Project Synapse ↗</span>
         </a>
 
-        <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="retina">
+        <a href="https://www.moss-brain.com/retina" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="retina">
           <span class="pill-node">NODE // RET-03</span>
           <span class="pill-name">Project Retina ↗</span>
         </a>
 
-        <a href="https://sites.google.com/view/moss-brain/cortex?authuser=0" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="hippocampus">
+        <a href="https://www.moss-brain.com/hippocampus" target="_blank" rel="noopener noreferrer" class="sector-pill" data-sector="hippocampus">
           <span class="pill-node">NODE // HIP-04</span>
           <span class="pill-name">Project Hippocampus ↗</span>
         </a>
@@ -782,62 +782,107 @@ html, body {
 document.addEventListener('DOMContentLoaded', () => {
   // Sector Registry for the 5 Brain Projects
   const SECTOR_DATA = {
-    cortex: {
-      id: 'cortex',
-      nodeCode: 'PROJECT CORTEX // CTX-01',
-      title: 'MOSS-BRAIN.COM - Project Cortex',
-      url: 'https://sites.google.com/view/moss-brain/cortex?authuser=0',
-      description: 'Primary high-level cognitive and algorithmic synthesis matrix. Manages abstract reasoning, multi-modal neural integration, executive decision pipelines, and continuous knowledge adaptation across the MOSS-BRAIN network.',
-      status: 'ONLINE // SYNC',
-      anchor: { x: 440, y: 150 },
-      elbow: { x: 530, y: 100 },
-      cardOffset: { x: 55, y: 8 }
+    "cortex": {
+        "id": "cortex",
+        "nodeCode": "PROJECT CORTEX // CTX-01",
+        "title": "MOSS-BRAIN.COM - Project Cortex",
+        "url": "https://sites.google.com/view/moss-brain/cortex?authuser=0",
+        "description": "Primary high-level cognitive and algorithmic synthesis matrix. Manages abstract reasoning, multi-modal neural integration, executive decision pipelines, and continuous knowledge adaptation across the MOSS-BRAIN network.",
+        "status": "ONLINE // SYNC",
+        "anchor": {
+            "x": 440,
+            "y": 150
+        },
+        "elbow": {
+            "x": 530,
+            "y": 100
+        },
+        "cardOffset": {
+            "x": 55,
+            "y": 8
+        }
     },
-    synapse: {
-      id: 'synapse',
-      nodeCode: 'PROJECT SYNAPSE // SYN-02',
-      title: 'Project Synapse (Local Core)',
-      url: 'http://localhost:3300/',
-      description: 'Hardware-accelerated tensor execution engine and high-bandwidth synaptic bus bridging synthetic neural network architectures with physical silicon compute circuitry.',
-      status: 'LOCAL // 3300 ACTIVE',
-      anchor: { x: 570, y: 395 },
-      elbow: { x: 440, y: 460 },
-      cardOffset: { x: 6, y: 44 }
+    "synapse": {
+        "id": "synapse",
+        "nodeCode": "PROJECT SYNAPSE // SYN-02",
+        "title": "Project Synapse (Local Core)",
+        "url": "http://localhost:3300/",
+        "description": "Hardware-accelerated tensor execution engine and high-bandwidth synaptic bus bridging synthetic neural network architectures with physical silicon compute circuitry.",
+        "status": "LOCAL // 3300 ACTIVE",
+        "anchor": {
+            "x": 570,
+            "y": 395
+        },
+        "elbow": {
+            "x": 440,
+            "y": 460
+        },
+        "cardOffset": {
+            "x": 6,
+            "y": 44
+        }
     },
-    retina: {
-      id: 'retina',
-      nodeCode: 'PROJECT RETINA // RET-03',
-      title: 'MOSS-BRAIN.COM - Project Retina',
-      url: 'https://sites.google.com/view/moss-brain/cortex?authuser=0',
-      description: 'Deep visual-spatial pattern recognition and multi-spectral sensory perception engine operating across recursive cryptographic circuit matrices (VENDCE 1).',
-      status: 'OPTICAL // 99.4%',
-      anchor: { x: 740, y: 310 },
-      elbow: { x: 840, y: 220 },
-      cardOffset: { x: 58, y: 20 }
+    "retina": {
+        "id": "retina",
+        "nodeCode": "PROJECT RETINA // RET-03",
+        "title": "MOSS-BRAIN.COM - Project Retina",
+        "url": "https://www.moss-brain.com/retina",
+        "description": "Deep visual-spatial pattern recognition and multi-spectral sensory perception engine operating across recursive cryptographic circuit matrices (VENDCE 1).",
+        "status": "OPTICAL // 99.4%",
+        "anchor": {
+            "x": 740,
+            "y": 310
+        },
+        "elbow": {
+            "x": 840,
+            "y": 220
+        },
+        "cardOffset": {
+            "x": 58,
+            "y": 20
+        }
     },
-    hippocampus: {
-      id: 'hippocampus',
-      nodeCode: 'PROJECT HIPPOCAMPUS // HIP-04',
-      title: 'MOSS-BRAIN.COM - Project Hippocampus',
-      url: 'https://sites.google.com/view/moss-brain/cortex?authuser=0',
-      description: 'Dynamic neural memory consolidation engine managing contextual indexing, relational knowledge graph retrieval, and experiential synaptic replay.',
-      status: 'MEMORY // INDEXED',
-      anchor: { x: 380, y: 290 },
-      elbow: { x: 260, y: 220 },
-      cardOffset: { x: 6, y: 14 }
+    "hippocampus": {
+        "id": "hippocampus",
+        "nodeCode": "PROJECT HIPPOCAMPUS // HIP-04",
+        "title": "MOSS-BRAIN.COM - Project Hippocampus",
+        "url": "https://www.moss-brain.com/hippocampus",
+        "description": "Dynamic neural memory consolidation engine managing contextual indexing, relational knowledge graph retrieval, and experiential synaptic replay.",
+        "status": "MEMORY // INDEXED",
+        "anchor": {
+            "x": 380,
+            "y": 290
+        },
+        "elbow": {
+            "x": 260,
+            "y": 220
+        },
+        "cardOffset": {
+            "x": 6,
+            "y": 14
+        }
     },
-    'basal-ganglia': {
-      id: 'basal-ganglia',
-      nodeCode: 'PROJECT BASAL GANGLIA // BG-05',
-      title: 'MOSS-BRAIN.COM - Project Basal Ganglia',
-      url: 'https://www.moss-brain.com/BG',
-      description: 'Central action-selection gating system executing deterministic rule verification, behavioral sequence orchestration, and real-time effector dispatch (01101).',
-      status: 'GATEWAY // READY',
-      anchor: { x: 200, y: 290 },
-      elbow: { x: 130, y: 180 },
-      cardOffset: { x: 6, y: 8 }
+    "basal-ganglia": {
+        "id": "basal-ganglia",
+        "nodeCode": "PROJECT BASAL GANGLIA // BG-05",
+        "title": "MOSS-BRAIN.COM - Project Basal Ganglia",
+        "url": "https://www.moss-brain.com/BG",
+        "description": "Central action-selection gating system executing deterministic rule verification, behavioral sequence orchestration, and real-time effector dispatch (01101).",
+        "status": "GATEWAY // READY",
+        "anchor": {
+            "x": 200,
+            "y": 290
+        },
+        "elbow": {
+            "x": 130,
+            "y": 180
+        },
+        "cardOffset": {
+            "x": 6,
+            "y": 8
+        }
     }
-  };
+};
 
   const hudCard = document.getElementById('hud-callout');
   const hudBadge = document.getElementById('hud-badge');
@@ -935,6 +980,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hudBadge) hudBadge.textContent = data.nodeCode;
     if (hudStatus) hudStatus.textContent = data.status;
     
+    // Explicitly update title and action button URLs for the active sector
     if (hudTitleLink) {
       hudTitleLink.href = data.url;
       hudTitleLink.target = '_blank';
@@ -978,6 +1024,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Hotspot Event Listeners (Brain segments)
   hotspotGroups.forEach(group => {
     const sectorId = group.dataset.sector;
 
@@ -990,7 +1037,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Sector Pill Listeners (Hyperlinked buttons)
+  // Sector Pill Listeners (Bottom Navigation Cards)
   sectorPills.forEach(pill => {
     const sectorId = pill.dataset.sector;
 
@@ -1019,6 +1066,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Default initial sector on load
   activateSector('cortex', false);
 });
 
