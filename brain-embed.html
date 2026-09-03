@@ -6,7 +6,7 @@
   <title>MOSS-BRAIN // Business Resource & Automated Intelligence Network</title>
   <style>
 /* ==========================================================================
-   MOSS-BRAIN // Modern Light Cybernetic Interface Stylesheet (Iframe Ready)
+   MOSS-BRAIN // Modern Light Cybernetic Interface Stylesheet (Iframe & Mobile Ready)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&display=swap');
@@ -14,7 +14,7 @@
 :root {
   --bg-page: #ffffff;
   --bg-subtle: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card: rgba(255, 255, 255, 0.94);
   --bg-card-hover: rgba(248, 250, 252, 0.98);
   
   --primary-blue: #0284c7;
@@ -141,12 +141,12 @@ html, body {
 .main-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-size: clamp(1.8rem, 4.5vw, 3.4rem);
   letter-spacing: 6px;
   text-transform: uppercase;
   color: var(--text-dark);
   line-height: 1.1;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .main-title .moss-accent {
@@ -158,15 +158,17 @@ html, body {
 
 .main-subtitle {
   font-family: var(--font-accent);
-  font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+  font-size: clamp(0.72rem, 1.2vw, 1.05rem);
   font-weight: 600;
   color: var(--text-muted);
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
+  text-align: center;
+  padding: 0 10px;
 }
 
 .main-subtitle::before,
@@ -316,7 +318,7 @@ html, body {
 }
 
 /* ==========================================================================
-   MODERN LIGHT HUD CALLOUT CARD
+   DESKTOP FLOATING HUD CALLOUT CARD
    ========================================================================== */
 .hud-callout-card {
   position: absolute;
@@ -446,6 +448,11 @@ html, body {
   box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
 }
 
+/* Mobile Carousel Controls (Hidden on Desktop) */
+.mobile-carousel-controls {
+  display: none;
+}
+
 /* ==========================================================================
    SECTOR DIRECTORY PANEL
    ========================================================================== */
@@ -490,10 +497,11 @@ html, body {
   color: var(--text-body);
   text-align: left;
   cursor: pointer;
-  transition: var(--transition-fast);
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  transition: var(--transition-fast);
 }
 
 .sector-pill .pill-node {
@@ -542,12 +550,39 @@ html, body {
   font-weight: 600;
 }
 
+/* ==========================================================================
+   MOBILE & TOUCH ENHANCEMENTS (max-width: 900px)
+   ========================================================================== */
 @media (max-width: 900px) {
+  .iframe-container {
+    padding: 10px 8px 20px;
+  }
+
+  .top-telemetry {
+    font-size: 0.68rem;
+    margin-bottom: 10px;
+  }
+
+  .main-subtitle::before,
+  .main-subtitle::after {
+    display: none;
+  }
+
+  .modern-frame {
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .leader-line-element {
+    display: none !important;
+  }
+
+  /* Mobile HUD Card Carousel Container */
   .hud-callout-card {
     position: relative;
     width: 100%;
     max-width: 100%;
-    margin-top: 14px;
+    margin-top: 12px;
     top: auto !important;
     left: auto !important;
     right: auto !important;
@@ -555,10 +590,126 @@ html, body {
     transform: none !important;
     opacity: 1 !important;
     pointer-events: all !important;
+    background: #ffffff;
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    padding: 14px 14px 12px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    touch-action: pan-y;
+    user-select: none;
   }
-  
-  .leader-line-element {
-    display: none;
+
+  .hud-title-link {
+    font-size: 1.05rem;
+  }
+
+  .hud-description {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+
+  /* Mobile Slide Controls & Dots */
+  .mobile-carousel-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #e2e8f0;
+    width: 100%;
+  }
+
+  .mobile-nav-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: var(--primary-blue);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+  }
+
+  .mobile-nav-btn:active {
+    background: #0284c7;
+    color: #ffffff;
+    transform: scale(0.92);
+  }
+
+  .carousel-dots-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .carousel-dot.active {
+    width: 22px;
+    border-radius: 4px;
+    background: var(--primary-blue);
+    box-shadow: 0 0 8px rgba(2, 132, 199, 0.4);
+  }
+
+  .mobile-swipe-hint {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .directory-section {
+    margin-top: 14px;
+  }
+
+  .sector-pills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+  }
+
+  .sector-pill {
+    padding: 8px 10px;
+  }
+
+  .sector-pill .pill-name {
+    font-size: 0.78rem;
+  }
+
+  .footer-telemetry {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    font-size: 0.68rem;
+  }
+}
+
+.mobile-carousel-controls,
+.mobile-swipe-hint {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .mobile-carousel-controls {
+    display: flex !important;
+  }
+  .mobile-swipe-hint {
+    display: block !important;
   }
 }
 
@@ -702,7 +853,7 @@ html, body {
 
           </svg>
 
-          <!-- Modern Light Floating HUD Callout Card -->
+          <!-- Modern Light Floating HUD Callout Card (Swipeable on Mobile) -->
           <div id="hud-callout" class="hud-callout-card">
             <div class="hud-card-header">
               <div class="hud-badge" id="hud-badge">PROJECT CORTEX // CTX-01</div>
@@ -725,6 +876,20 @@ html, body {
                 OPEN NODE ↗
               </a>
             </div>
+
+            <!-- Mobile Carousel Swipe Controls & Dots -->
+            <div class="mobile-carousel-controls">
+              <button id="carousel-prev" class="mobile-nav-btn" aria-label="Previous Sector">‹</button>
+              <div class="carousel-dots-wrapper">
+                <span class="carousel-dot active" data-index="0"></span>
+                <span class="carousel-dot" data-index="1"></span>
+                <span class="carousel-dot" data-index="2"></span>
+                <span class="carousel-dot" data-index="3"></span>
+                <span class="carousel-dot" data-index="4"></span>
+              </div>
+              <button id="carousel-next" class="mobile-nav-btn" aria-label="Next Sector">›</button>
+            </div>
+            <div class="mobile-swipe-hint">‹ Swipe or tap arrows to navigate ›</div>
           </div>
 
         </div>
@@ -776,7 +941,7 @@ html, body {
 
   <script>
 /**
- * MOSS-BRAIN // Cybernetic Neural Interface Controller
+ * MOSS-BRAIN // Cybernetic Neural Interface Controller (Touch & Carousel Ready)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -784,6 +949,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const SECTOR_DATA = {
     "cortex": {
         "id": "cortex",
+        "index": 0,
         "nodeCode": "PROJECT CORTEX // CTX-01",
         "title": "MOSS-BRAIN.COM - Project Cortex",
         "url": "https://sites.google.com/view/moss-brain/cortex?authuser=0",
@@ -804,6 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "synapse": {
         "id": "synapse",
+        "index": 1,
         "nodeCode": "PROJECT SYNAPSE // SYN-02",
         "title": "Project Synapse (Local Core)",
         "url": "http://localhost:3300/",
@@ -824,6 +991,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "retina": {
         "id": "retina",
+        "index": 2,
         "nodeCode": "PROJECT RETINA // RET-03",
         "title": "MOSS-BRAIN.COM - Project Retina",
         "url": "https://www.moss-brain.com/retina",
@@ -844,6 +1012,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "hippocampus": {
         "id": "hippocampus",
+        "index": 3,
         "nodeCode": "PROJECT HIPPOCAMPUS // HIP-04",
         "title": "MOSS-BRAIN.COM - Project Hippocampus",
         "url": "https://www.moss-brain.com/hippocampus",
@@ -864,6 +1033,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "basal-ganglia": {
         "id": "basal-ganglia",
+        "index": 4,
         "nodeCode": "PROJECT BASAL GANGLIA // BG-05",
         "title": "MOSS-BRAIN.COM - Project Basal Ganglia",
         "url": "https://www.moss-brain.com/BG",
@@ -883,6 +1053,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 };
+  const sectorOrder = ['cortex', 'synapse', 'retina', 'hippocampus', 'basal-ganglia'];
 
   const hudCard = document.getElementById('hud-callout');
   const hudBadge = document.getElementById('hud-badge');
@@ -899,8 +1070,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const mouseCoords = document.getElementById('mouse-coords');
   const activeSectorName = document.getElementById('active-sector-name');
   const audioToggle = document.getElementById('audio-toggle');
+  
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const dots = document.querySelectorAll('.carousel-dot');
 
-  let activeSector = null;
+  let activeSector = 'cortex';
   let audioEnabled = false;
   let audioCtx = null;
 
@@ -973,6 +1148,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    dots.forEach((dot, idx) => {
+      if (idx === data.index) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+
     if (activeSectorName) {
       activeSectorName.textContent = data.nodeCode;
     }
@@ -980,7 +1163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hudBadge) hudBadge.textContent = data.nodeCode;
     if (hudStatus) hudStatus.textContent = data.status;
     
-    // Explicitly update title and action button URLs for the active sector
+    // Explicitly update title link and action button URLs
     if (hudTitleLink) {
       hudTitleLink.href = data.url;
       hudTitleLink.target = '_blank';
@@ -1021,6 +1204,62 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       hudCard.classList.add('visible');
+    }
+  }
+
+  function nextSector() {
+    const currentIndex = SECTOR_DATA[activeSector].index;
+    const nextIndex = (currentIndex + 1) % sectorOrder.length;
+    activateSector(sectorOrder[nextIndex]);
+  }
+
+  function prevSector() {
+    const currentIndex = SECTOR_DATA[activeSector].index;
+    const prevIndex = (currentIndex - 1 + sectorOrder.length) % sectorOrder.length;
+    activateSector(sectorOrder[prevIndex]);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevSector(); });
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextSector(); });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.dataset.index, 10);
+      if (!isNaN(idx) && sectorOrder[idx]) {
+        activateSector(sectorOrder[idx]);
+      }
+    });
+  });
+
+  // Touch Swipe Gesture on HUD Card (Mobile)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+
+  if (hudCard) {
+    hudCard.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    hudCard.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    }, { passive: true });
+  }
+
+  function handleSwipe() {
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    
+    if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        nextSector(); // Swiped left -> next
+      } else {
+        prevSector(); // Swiped right -> prev
+      }
     }
   }
 
